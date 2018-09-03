@@ -39,7 +39,7 @@ class Subversion19utf8 < Formula
   depends_on "openssl"
 
   # Other optional dependencies
-  depends_on "gpg-agent" => :optional
+  depends_on "gpg" => :optional
   depends_on :java => :optional
 
   resource "serf" do
@@ -113,7 +113,7 @@ class Subversion19utf8 < Formula
     ]
 
     args << "--enable-javahl" << "--without-jikes" if build.with? "java"
-    args << "--without-gpg-agent" if build.without? "gpg-agent"
+    args << "--without-gpg-agent" if build.without? "gpg"
 
     if build.with? "ruby"
       args << "--with-ruby-sitedir=#{lib}/ruby"
@@ -183,13 +183,13 @@ class Subversion19utf8 < Formula
   end
 
   def caveats
-    s = <<-EOS.undent
+    s = <<~EOS
       svntools have been installed to:
         #{opt_libexec}
     EOS
 
     if build.with? "perl"
-      s += <<-EOS.undent
+      s += <<~EOS
 
         The perl bindings are located in various subdirectories of:
           #{prefix}/Library/Perl
@@ -197,7 +197,7 @@ class Subversion19utf8 < Formula
     end
 
     if build.with? "ruby"
-      s += <<-EOS.undent
+      s += <<~EOS
 
         You may need to add the Ruby bindings to your RUBYLIB from:
           #{HOMEBREW_PREFIX}/lib/ruby
@@ -205,7 +205,7 @@ class Subversion19utf8 < Formula
     end
 
     if build.with? "java"
-      s += <<-EOS.undent
+      s += <<~EOS
 
         You may need to link the Java bindings into the Java Extensions folder:
           sudo mkdir -p /Library/Java/Extensions
