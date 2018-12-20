@@ -39,7 +39,7 @@ class Subversion19utf8 < Formula
   depends_on "openssl"
 
   # Other optional dependencies
-  depends_on "gpg" => :optional
+  depends_on "gnupg" => :optional
   depends_on :java => :optional
 
   resource "serf" do
@@ -113,7 +113,7 @@ class Subversion19utf8 < Formula
     ]
 
     args << "--enable-javahl" << "--without-jikes" if build.with? "java"
-    args << "--without-gpg-agent" if build.without? "gpg"
+    args << "--without-gpg-agent" if build.without? "gnupg"
 
     if build.with? "ruby"
       args << "--with-ruby-sitedir=#{lib}/ruby"
